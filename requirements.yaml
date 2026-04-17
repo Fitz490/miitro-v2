@@ -1,0 +1,22 @@
+packages:
+  "framer-motion": "For premium page transitions and scroll animations"
+  "react-hook-form": "For complex form state management"
+  "@hookform/resolvers": "For Zod validation integration with forms"
+  "clsx": "For conditional class name merging"
+  "tailwind-merge": "For merging Tailwind utility classes safely"
+  "date-fns": "For formatting dates in dashboards"
+
+images:
+  - path: "artifacts/red-shield/public/images/logo.png"
+    description: "Minimal modern geometric logo mark for a company called 'Red Shield'. Should feature a sleek, abstract shield shape in vibrant crimson red and deep charcoal black. No text, transparent background."
+    aspect_ratio: "1:1"
+  - path: "artifacts/red-shield/public/images/hero-bg.png"
+    description: "Abstract premium dark background. Deep charcoal and black with subtle, moody crimson red light leaks and geometric architectural lines. Sophisticated, high-tech, automotive feel."
+    aspect_ratio: "16:9"
+  - path: "artifacts/red-shield/public/images/about-driver.png"
+    description: "A professional driver standing proudly next to a high-end black SUV in a modern city at twilight. Subtle red ambient lighting. High quality, cinematic."
+    aspect_ratio: "16:9"
+
+notes:
+  - Assumes @workspace/api-client-react provides all TanStack Query hooks
+  - Assumes session cookies are handled automatically by the browser via credentials: 'include'
