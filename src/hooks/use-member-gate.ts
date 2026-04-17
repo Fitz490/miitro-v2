@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useLocation } from "wouter";
 import { useAuth } from "./use-auth";
-import type { UserProfile } from "@workspace/api-client-react";
+import type { UserProfile } from "@/lib/api-client-react";
 
 // ── Access-tier predicates ────────────────────────────────────────────────────
 // Single source of truth for all driver access rules.

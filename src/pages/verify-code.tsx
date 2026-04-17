@@ -4,7 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { useEffect, useRef, useState, useCallback } from "react";
 import { useLocation } from "wouter";
 import { useQueryClient } from "@tanstack/react-query";
-import { getGetCurrentUserQueryKey } from "@workspace/api-client-react";
+import { getGetCurrentUserQueryKey } from "@/lib/api-client-react";
 import { AlertCircle, CheckCircle2, Loader2, Mail, RefreshCw, ShieldCheck } from "lucide-react";
 
 const CODE_LENGTH = 6;

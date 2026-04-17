@@ -8,7 +8,7 @@ import {
   getGetCurrentUserQueryKey,
   type UserProfile,
   type LoginRequest
-} from '@workspace/api-client-react';
+} from '@/lib/api-client-react';
 import { useToast } from '@/hooks/use-toast';
 
 interface AuthContextType {

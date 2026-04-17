@@ -2,7 +2,7 @@ import { useMemo, useEffect } from "react";
 import { AppLayout } from "@/components/layout/app-layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { useGetPaymentStatus } from "@workspace/api-client-react";
+import { useGetPaymentStatus } from "@/lib/api-client-react";
 import { Shield, CheckCircle, CheckCircle2 } from "lucide-react";
 import { useAuth } from "@/hooks/use-auth";
 import { useLocation } from "wouter";

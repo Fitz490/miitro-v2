@@ -1,22 +1,27 @@
 {
-  "extends": "../../tsconfig.base.json",
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "build", "dist", "**/*.test.ts"],
   "compilerOptions": {
-    "noEmit": true,
+    "target": "es2022",
+    "lib": ["es2022", "dom", "dom.iterable"],
+    "module": "esnext",
+    "moduleResolution": "bundler",
     "jsx": "preserve",
-    "lib": ["esnext", "dom", "dom.iterable"],
+    "noEmit": true,
+    "isolatedModules": true,
     "resolveJsonModule": true,
     "allowImportingTsExtensions": true,
-    "moduleResolution": "bundler",
+    "skipLibCheck": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "strictNullChecks": true,
+    "strictBindCallApply": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "alwaysStrict": true,
     "types": ["node", "vite/client"],
     "paths": {
       "@/*": ["./src/*"]
     }
   },
-  "references": [
-    {
-      "path": "../../lib/api-client-react"
-    }
-  ]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "build", "dist"]
 }

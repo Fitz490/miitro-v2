@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { useAuth } from "@/hooks/use-auth";
-import { useGetDriverDashboard } from "@workspace/api-client-react";
+import { useGetDriverDashboard } from "@/lib/api-client-react";
 import { formatCurrency, formatDate } from "@/lib/utils";
 import { Copy, DollarSign, Clock, CreditCard, CheckCircle2, BookOpen, Lock, Zap, ArrowRight } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
