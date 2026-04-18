@@ -46,6 +46,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           return;
         }
 
+        // Defensive: if the response was empty/null (e.g. proxy stripped the
+        // body) fall back to a /me refetch instead of crashing.
+        if (!data?.user) {
+          console.warn("[Auth] login response missing user — refetching /me");
+          queryClient.invalidateQueries({ queryKey: getGetCurrentUserQueryKey() });
+          setLocation('/dashboard');
+          return;
+        }
+
         queryClient.setQueryData(getGetCurrentUserQueryKey(), data.user);
         toast({
           title: "Welcome back",

@@ -3,15 +3,16 @@
  * don't go through the generated orval/react-query client).
  *
  * Two things it adds:
- *   1. Prepends the production API base URL so the request reaches Railway
- *      instead of hitting the Vercel domain with a relative path.
- *   2. Sets `credentials: "include"` so the session cookie is sent
- *      cross-origin.
+ *   1. Keeps paths relative so they go through the Vercel rewrite proxy
+ *      (production) or the Vite dev proxy (local dev), making session
+ *      cookies first-party.
+ *   2. Sets `credentials: "include"` so the session cookie is always sent.
+ *
+ * Override with VITE_API_URL at build time only if you need to bypass the
+ * proxy and hit a backend directly.
  */
 
-const API_BASE: string =
-  import.meta.env.VITE_API_URL ||
-  (import.meta.env.DEV ? "" : "https://miitro-api-production.up.railway.app");
+const API_BASE: string = import.meta.env.VITE_API_URL || "";
 
 export function apiFetch(
   path: string,

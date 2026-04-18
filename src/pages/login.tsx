@@ -44,6 +44,9 @@ export default function Login() {
     try {
       await login(data);
     } catch (err: unknown) {
+      // Log the raw error so we can diagnose issues from the browser console.
+      console.error("[Login] login failed:", err);
+
       // Clear the password field and return focus to it so the user can retry immediately.
       setValue("password", "");
       setFocus("password");
