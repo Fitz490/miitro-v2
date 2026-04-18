@@ -41,19 +41,17 @@ export default function MockCheckout() {
   );
 
   // Protect route — authenticated only.
-  // Also redirect away if a live Stripe key is present — mock checkout
-  // should never be reachable in production (backend sends a real Stripe URL).
+  // If the frontend has a live Stripe key but the backend sent us here anyway
+  // (STRIPE_SECRET_KEY missing on the backend), show the mock checkout rather
+  // than redirecting back to /payment — which would create an infinite loop
+  // (payment → create-checkout → mock URL → redirect → payment → …).
   useEffect(() => {
     if (!userLoading && !user) {
       setLocation("/login");
       return;
     }
-    // Only redirect once plan is resolved — plan is null while products are loading
-    if (isLiveMode && plan) {
-      setLocation(`/payment?plan=${plan.key}`);
-    }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userLoading, user, plan]);
+  }, [userLoading, user]);
 
   if (userLoading || productsLoading || !user || !plan) {
     return (
