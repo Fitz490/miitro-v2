@@ -1,3 +1,4 @@
+import { apiFetch } from "@/lib/api-fetch";
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { AppLayout } from "@/components/layout/app-layout";
@@ -851,7 +852,7 @@ export default function MemberDashboard() {
   const { data: dashboard, isLoading, isError } = useQuery<DashboardData>({
     queryKey: ["member-dashboard"],
     queryFn: async () => {
-      const res = await fetch("/api/members/dashboard");
+      const res = await apiFetch("/api/members/dashboard");
       if (!res.ok) throw new Error("Failed to load dashboard");
       return res.json();
     },

@@ -1,3 +1,4 @@
+import { apiFetch } from "@/lib/api-fetch";
 import { AppLayout } from "@/components/layout/app-layout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -50,7 +51,7 @@ export default function AffiliatePage() {
   const { data, isLoading } = useQuery<AffiliateDashboard>({
     queryKey: ["affiliate-dashboard"],
     queryFn: async () => {
-      const res = await fetch("/api/affiliate/dashboard");
+      const res = await apiFetch("/api/affiliate/dashboard");
       if (!res.ok) throw new Error("Failed to load affiliate data");
       return res.json();
     },
@@ -59,7 +60,7 @@ export default function AffiliatePage() {
 
   const enrollMutation = useMutation({
     mutationFn: async () => {
-      const res = await fetch("/api/affiliate/enroll", { method: "POST" });
+      const res = await apiFetch("/api/affiliate/enroll", { method: "POST" });
       if (!res.ok) {
         const text = await res.text();
         let message = "Enrollment failed";

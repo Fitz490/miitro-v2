@@ -1,3 +1,4 @@
+import { apiFetch } from "@/lib/api-fetch";
 import { useEffect, useState } from "react";
 import { useLocation, useParams } from "wouter";
 import { AppLayout } from "@/components/layout/app-layout";
@@ -245,7 +246,7 @@ export default function TrainingModule() {
   const { data: module, isLoading, error } = useQuery<ModuleDetail>({
     queryKey: ["training-module", id],
     queryFn: async () => {
-      const res = await fetch(`/api/training/modules/${id}`);
+      const res = await apiFetch(`/api/training/modules/${id}`);
       if (!res.ok) {
         const body = await res.json();
         throw new Error(body.message ?? "Module not found");
@@ -261,7 +262,7 @@ export default function TrainingModule() {
 
   const progressMutation = useMutation({
     mutationFn: async ({ pct, status }: { pct: number; status?: string }) => {
-      const res = await fetch(`/api/training/modules/${id}/progress`, {
+      const res = await apiFetch(`/api/training/modules/${id}/progress`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ progressPercent: pct, status }),

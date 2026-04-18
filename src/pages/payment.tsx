@@ -1,3 +1,4 @@
+import { apiFetch } from "@/lib/api-fetch";
 import { useMemo, useEffect } from "react";
 import { AppLayout } from "@/components/layout/app-layout";
 import { Button } from "@/components/ui/button";
@@ -44,7 +45,7 @@ export default function Payment() {
   // The generated useCreateCheckoutSession hook does not accept a request body.
   const checkoutMutation = useMutation({
     mutationFn: async () => {
-      const res = await fetch("/api/payments/create-checkout", {
+      const res = await apiFetch("/api/payments/create-checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ product: plan!.key }),

@@ -1,3 +1,4 @@
+import { apiFetch } from "@/lib/api-fetch";
 /**
  * useProducts — fetches the product catalogue from GET /api/products.
  *
@@ -15,7 +16,7 @@ export function useProducts() {
   return useQuery<Plan[]>({
     queryKey: ["products"],
     queryFn: async () => {
-      const res = await fetch("/api/products");
+      const res = await apiFetch("/api/products");
       if (!res.ok) throw new Error("Failed to load products");
       return res.json() as Promise<Plan[]>;
     },

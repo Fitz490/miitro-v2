@@ -1,3 +1,4 @@
+import { apiFetch } from "@/lib/api-fetch";
 import { AppLayout } from "@/components/layout/app-layout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -122,7 +123,7 @@ export default function LiveEvents() {
   const { data: events, isLoading } = useQuery<Event[]>({
     queryKey: ["events"],
     queryFn: async () => {
-      const res = await fetch("/api/events");
+      const res = await apiFetch("/api/events");
       if (!res.ok) throw new Error("Failed to load events");
       return res.json();
     },

@@ -1,3 +1,4 @@
+import { apiFetch } from "@/lib/api-fetch";
 import { useState, useEffect, useMemo } from "react";
 import { useLocation } from "wouter";
 import { useQueryClient } from "@tanstack/react-query";
@@ -65,7 +66,7 @@ export default function MockCheckout() {
   const handleConfirm = async () => {
     setIsPaying(true);
     try {
-      const res = await fetch("/api/payments/mock-complete", {
+      const res = await apiFetch("/api/payments/mock-complete", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

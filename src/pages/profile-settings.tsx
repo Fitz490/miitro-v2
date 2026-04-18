@@ -1,3 +1,4 @@
+import { apiFetch } from "@/lib/api-fetch";
 import { useState, useEffect } from "react";
 import { AppLayout } from "@/components/layout/app-layout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -79,7 +80,7 @@ export default function ProfileSettings() {
   const { data: payoutInfo } = useQuery<PayoutInfo>({
     queryKey: ["member-payout-info"],
     queryFn: async () => {
-      const res = await fetch("/api/members/payout-info");
+      const res = await apiFetch("/api/members/payout-info");
       if (!res.ok) throw new Error("Failed to load payout info");
       return res.json();
     },
@@ -99,7 +100,7 @@ export default function ProfileSettings() {
   const profileMutation = useMutation({
     mutationFn: async () => {
       const fullName = `${firstName.trim()} ${lastName.trim()}`.trim();
-      const res = await fetch("/api/members/profile", {
+      const res = await apiFetch("/api/members/profile", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ fullName, phone, city, state, vehicleType }),
@@ -119,7 +120,7 @@ export default function ProfileSettings() {
   // ── Payout mutation ────────────────────────────────────────────────────────
   const payoutMutation = useMutation({
     mutationFn: async () => {
-      const res = await fetch("/api/members/payout-info", {
+      const res = await apiFetch("/api/members/payout-info", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -147,7 +148,7 @@ export default function ProfileSettings() {
   // ── Password mutation ──────────────────────────────────────────────────────
   const passwordMutation = useMutation({
     mutationFn: async () => {
-      const res = await fetch("/api/members/password", {
+      const res = await apiFetch("/api/members/password", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ currentPassword, newPassword, confirmPassword }),

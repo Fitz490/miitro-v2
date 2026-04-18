@@ -1,3 +1,4 @@
+import { apiFetch } from "@/lib/api-fetch";
 import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { AppLayout } from "@/components/layout/app-layout";
@@ -230,7 +231,7 @@ function OverviewTab({ onNavigate }: { onNavigate: NavigateFn }) {
   const { data: stats, isLoading } = useQuery<Record<string, number>>({
     queryKey: ["admin-stats"],
     queryFn: async () => {
-      const res = await fetch("/api/admin/stats");
+      const res = await apiFetch("/api/admin/stats");
       if (!res.ok) throw new Error("Failed to load stats");
       return res.json();
     },
@@ -375,7 +376,7 @@ function MemberDetailsSheet({
   const { data, isLoading } = useQuery<DriverDetailResponse>({
     queryKey: ["admin-driver-detail", memberId],
     queryFn: async () => {
-      const res = await fetch(`/api/admin/drivers/${memberId}`);
+      const res = await apiFetch(`/api/admin/drivers/${memberId}`);
       if (!res.ok) throw new Error("Failed to load driver details");
       return res.json();
     },
@@ -545,7 +546,7 @@ function MembersTab({
       params.set("limit", "200");
       if (search)       params.set("search", search);
       if (paymentParam) params.set("paymentStatus", paymentParam);
-      const res = await fetch(`/api/admin/drivers?${params}`);
+      const res = await apiFetch(`/api/admin/drivers?${params}`);
       if (!res.ok) throw new Error("Failed to load members");
       return res.json();
     },
@@ -565,7 +566,7 @@ function MembersTab({
     // eslint-disable-next-line react-hooks/rules-of-hooks
     return useMutation({
       mutationFn: async (id: number) => {
-        const res = await fetch(`/api/admin/drivers/${id}/${path}`, { method: "POST" });
+        const res = await apiFetch(`/api/admin/drivers/${id}/${path}`, { method: "POST" });
         if (!res.ok) {
           const body = await res.json().catch(() => ({}));
           throw new Error(body?.message || "Request failed");
@@ -916,7 +917,7 @@ function CommissionsTab({
   const { data: allCommissions = [], isLoading } = useQuery<AdminCommission[]>({
     queryKey: ["admin-commissions"],
     queryFn: async () => {
-      const res = await fetch("/api/admin/commissions");
+      const res = await apiFetch("/api/admin/commissions");
       if (!res.ok) throw new Error("Failed to load commissions");
       return res.json();
     },
@@ -932,7 +933,7 @@ function CommissionsTab({
 
   const approveMutation = useMutation({
     mutationFn: async (id: number) => {
-      const res = await fetch(`/api/admin/commissions/${id}/approve`, { method: "POST" });
+      const res = await apiFetch(`/api/admin/commissions/${id}/approve`, { method: "POST" });
       if (!res.ok) throw new Error("Failed to approve");
       return res.json();
     },
@@ -946,7 +947,7 @@ function CommissionsTab({
 
   const markPaidMutation = useMutation({
     mutationFn: async (id: number) => {
-      const res = await fetch(`/api/admin/commissions/${id}/mark-paid`, { method: "POST" });
+      const res = await apiFetch(`/api/admin/commissions/${id}/mark-paid`, { method: "POST" });
       if (!res.ok) throw new Error("Failed to mark paid");
       return res.json();
     },
@@ -1096,7 +1097,7 @@ function AnnouncementsTab() {
   const { data: items = [], isLoading } = useQuery<AdminAnnouncement[]>({
     queryKey: ["admin-announcements"],
     queryFn: async () => {
-      const res = await fetch("/api/admin/announcements");
+      const res = await apiFetch("/api/admin/announcements");
       if (!res.ok) throw new Error("Failed to load");
       return res.json();
     },
@@ -1123,7 +1124,7 @@ function AnnouncementsTab() {
 
   const togglePublish = useMutation({
     mutationFn: async (a: AdminAnnouncement) => {
-      const res = await fetch(`/api/admin/announcements/${a.id}`, { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ isPublished: !a.isPublished }) });
+      const res = await apiFetch(`/api/admin/announcements/${a.id}`, { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ isPublished: !a.isPublished }) });
       if (!res.ok) throw new Error("Failed to update");
       return res.json();
     },
@@ -1133,7 +1134,7 @@ function AnnouncementsTab() {
 
   const deleteMutation = useMutation({
     mutationFn: async (id: number) => {
-      const res = await fetch(`/api/admin/announcements/${id}`, { method: "DELETE" });
+      const res = await apiFetch(`/api/admin/announcements/${id}`, { method: "DELETE" });
       if (!res.ok) throw new Error("Delete failed");
     },
     onSuccess: () => { queryClient.invalidateQueries({ queryKey: ["admin-announcements"] }); setDeleteTarget(null); toast({ title: "Deleted" }); },
@@ -1280,7 +1281,7 @@ function EventsTab() {
   const { data: items = [], isLoading } = useQuery<AdminEvent[]>({
     queryKey: ["admin-events"],
     queryFn: async () => {
-      const res = await fetch("/api/admin/events");
+      const res = await apiFetch("/api/admin/events");
       if (!res.ok) throw new Error("Failed to load events");
       return res.json();
     },
@@ -1328,7 +1329,7 @@ function EventsTab() {
 
   const deleteMutation = useMutation({
     mutationFn: async (id: number) => {
-      const res = await fetch(`/api/admin/events/${id}`, { method: "DELETE" });
+      const res = await apiFetch(`/api/admin/events/${id}`, { method: "DELETE" });
       if (!res.ok) throw new Error("Delete failed");
     },
     onSuccess: () => { queryClient.invalidateQueries({ queryKey: ["admin-events"] }); setDeleteTarget(null); toast({ title: "Event deleted" }); },
@@ -1513,7 +1514,7 @@ function TrainingTab() {
   const { data: items = [], isLoading } = useQuery<AdminTrainingModule[]>({
     queryKey: ["admin-training"],
     queryFn: async () => {
-      const res = await fetch("/api/admin/training");
+      const res = await apiFetch("/api/admin/training");
       if (!res.ok) throw new Error("Failed to load modules");
       return res.json();
     },
@@ -1560,7 +1561,7 @@ function TrainingTab() {
   const toggleStatus = useMutation({
     mutationFn: async (m: AdminTrainingModule) => {
       const next = m.status === "published" ? "draft" : "published";
-      const res = await fetch(`/api/admin/training/${m.id}`, { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ status: next }) });
+      const res = await apiFetch(`/api/admin/training/${m.id}`, { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ status: next }) });
       if (!res.ok) throw new Error("Failed to update status");
       return res.json();
     },
@@ -1570,7 +1571,7 @@ function TrainingTab() {
 
   const deleteMutation = useMutation({
     mutationFn: async (id: number) => {
-      const res = await fetch(`/api/admin/training/${id}`, { method: "DELETE" });
+      const res = await apiFetch(`/api/admin/training/${id}`, { method: "DELETE" });
       if (!res.ok) throw new Error("Delete failed");
     },
     onSuccess: () => { queryClient.invalidateQueries({ queryKey: ["admin-training"] }); setDeleteTarget(null); toast({ title: "Module deleted" }); },
@@ -1770,7 +1771,7 @@ export default function AdminDashboard() {
   // ── Dev-only: re-seed test driver accounts ───────────────────────────────────
   const reseedMutation = useMutation({
     mutationFn: async () => {
-      const res = await fetch("/api/admin/dev/reseed", { method: "POST" });
+      const res = await apiFetch("/api/admin/dev/reseed", { method: "POST" });
       if (!res.ok) {
         const body = await res.json().catch(() => ({}));
         throw new Error((body as any).message ?? `HTTP ${res.status}`);

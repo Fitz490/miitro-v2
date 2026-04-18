@@ -1,3 +1,4 @@
+import { apiFetch } from "@/lib/api-fetch";
 import { useState, useEffect } from "react";
 import { AppLayout } from "@/components/layout/app-layout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -164,7 +165,7 @@ function PayoutInfoSection() {
   const { data: payoutInfo, isLoading } = useQuery<PayoutInfo>({
     queryKey: ["driver-payout-info"],
     queryFn: async () => {
-      const res = await fetch("/api/drivers/payout-info");
+      const res = await apiFetch("/api/drivers/payout-info");
       if (!res.ok) throw new Error("Failed to load payout info");
       return res.json();
     },
@@ -181,7 +182,7 @@ function PayoutInfoSection() {
 
   const saveMutation = useMutation({
     mutationFn: async () => {
-      const res = await fetch("/api/drivers/payout-info", {
+      const res = await apiFetch("/api/drivers/payout-info", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ payoutMethod: method, payoutFullName: fullName, payoutContact: contact, payoutNotes: notes }),

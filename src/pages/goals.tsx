@@ -1,3 +1,4 @@
+import { apiFetch } from "@/lib/api-fetch";
 import { useState } from "react";
 import { AppLayout } from "@/components/layout/app-layout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -153,7 +154,7 @@ export default function Goals() {
   const { data: goals = [], isLoading } = useQuery<GoalRecord[]>({
     queryKey: ["member-goals"],
     queryFn: async () => {
-      const res = await fetch("/api/members/goals");
+      const res = await apiFetch("/api/members/goals");
       if (!res.ok) throw new Error("Failed to load goals");
       return res.json();
     },
@@ -167,7 +168,7 @@ export default function Goals() {
       if (tripGoal) payload.tripGoal = parseInt(tripGoal, 10);
       if (earningsGoal) payload.earningsGoal = parseFloat(earningsGoal);
 
-      const res = await fetch("/api/members/goals", {
+      const res = await apiFetch("/api/members/goals", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -194,7 +195,7 @@ export default function Goals() {
 
   const deleteMutation = useMutation({
     mutationFn: async (id: number) => {
-      const res = await fetch(`/api/members/goals/${id}`, { method: "DELETE" });
+      const res = await apiFetch(`/api/members/goals/${id}`, { method: "DELETE" });
       if (!res.ok) {
         const body = await res.json().catch(() => ({}));
         throw new Error(body.message ?? "Failed to delete goal");

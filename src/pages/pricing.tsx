@@ -1,3 +1,4 @@
+import { apiFetch } from "@/lib/api-fetch";
 import { useLocation } from "wouter";
 import { AppLayout } from "@/components/layout/app-layout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -40,7 +41,7 @@ export default function Pricing() {
         setLocation(`/join?plan=${product}`);
         return null;
       }
-      const res = await fetch("/api/payments/create-checkout", {
+      const res = await apiFetch("/api/payments/create-checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ product }),

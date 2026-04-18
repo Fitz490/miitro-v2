@@ -1,3 +1,4 @@
+import { apiFetch } from "@/lib/api-fetch";
 import { AppLayout } from "@/components/layout/app-layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -98,7 +99,7 @@ export default function VerifyCode() {
     setSubmitting(true);
     setError(null);
     try {
-      const res = await fetch("/api/auth/verify-2fa", {
+      const res = await apiFetch("/api/auth/verify-2fa", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -130,7 +131,7 @@ export default function VerifyCode() {
     setError(null);
     setErrorType(null);
     try {
-      const res = await fetch("/api/auth/resend-2fa", {
+      const res = await apiFetch("/api/auth/resend-2fa", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

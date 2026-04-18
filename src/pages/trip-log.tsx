@@ -1,3 +1,4 @@
+import { apiFetch } from "@/lib/api-fetch";
 import { useState } from "react";
 import { AppLayout } from "@/components/layout/app-layout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -41,7 +42,7 @@ export default function TripLog() {
   const { data: trips = [], isLoading: tripsLoading } = useQuery<TripRecord[]>({
     queryKey: ["member-trips"],
     queryFn: async () => {
-      const res = await fetch("/api/members/trips");
+      const res = await apiFetch("/api/members/trips");
       if (!res.ok) throw new Error("Failed to load trips");
       return res.json();
     },
@@ -50,7 +51,7 @@ export default function TripLog() {
 
   const tripMutation = useMutation({
     mutationFn: async () => {
-      const res = await fetch("/api/members/trips", {
+      const res = await apiFetch("/api/members/trips", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

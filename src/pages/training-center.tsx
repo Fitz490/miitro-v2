@@ -1,3 +1,4 @@
+import { apiFetch } from "@/lib/api-fetch";
 import { Link, useLocation } from "wouter";
 import { AppLayout } from "@/components/layout/app-layout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -142,7 +143,7 @@ export default function TrainingCenter() {
   const { data: modules, isLoading } = useQuery<TrainingModule[]>({
     queryKey: ["training-modules"],
     queryFn: async () => {
-      const res = await fetch("/api/training/modules");
+      const res = await apiFetch("/api/training/modules");
       if (!res.ok) throw new Error("Failed to load modules");
       return res.json();
     },
