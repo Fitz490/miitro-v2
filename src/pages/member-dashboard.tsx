@@ -470,18 +470,17 @@ function LockedTrainingCard() {
             <p className="font-semibold text-base mb-1">Training not included</p>
             <p className="text-sm text-muted-foreground leading-relaxed max-w-xs mx-auto">
               The professional driver training curriculum is not part of your{" "}
-              <strong>Founding Membership</strong>. Upgrade to the{" "}
-              <strong>Bundle</strong> to unlock all video modules, PDF guides,
-              and the full training experience.
+              <strong>Founding Membership</strong>. Add the Training Program
+              to unlock all video modules, PDF guides, and the full training
+              experience.
             </p>
           </div>
         </div>
         <Button
-          variant="outline"
           className="w-full"
-          onClick={() => setLocation("/pricing")}
+          onClick={() => setLocation("/payment?plan=training")}
         >
-          Upgrade to Bundle <ArrowRight className="w-4 h-4 ml-2" />
+          Add Training — $200 <ArrowRight className="w-4 h-4 ml-2" />
         </Button>
       </CardContent>
     </Card>

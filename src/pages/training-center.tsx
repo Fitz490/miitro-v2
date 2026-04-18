@@ -10,7 +10,7 @@ import { useMemberGate } from "@/hooks/use-member-gate";
 import { useQuery } from "@tanstack/react-query";
 import {
   BookOpen, Play, FileText, Lock, CheckCircle2,
-  Clock, ChevronRight, Download, Video, ArrowRight,
+  Clock, ChevronRight, Download, Video, ArrowRight, Shield,
 } from "lucide-react";
 
 interface TrainingModule {
@@ -181,6 +181,29 @@ export default function TrainingCenter() {
             Professional driver training — video modules, guides, and downloadable resources.
           </p>
         </div>
+
+        {/* Upgrade banner — training-only users can add the Founding Membership */}
+        {user.productPurchased === "training" && (
+          <Card className="border-primary/30 bg-primary/5">
+            <CardContent className="pt-5 pb-5">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                  <Shield className="w-5 h-5 text-primary" />
+                </div>
+                <div className="flex-1">
+                  <p className="font-semibold text-sm">Unlock the full Miitro platform</p>
+                  <p className="text-sm text-muted-foreground">
+                    Add the Founding Membership to access your driver dashboard,
+                    performance tracking, community events, and affiliate program.
+                  </p>
+                </div>
+                <Button size="sm" onClick={() => setLocation("/payment?plan=membership")}>
+                  Add Membership — $300 <ArrowRight className="w-4 h-4 ml-1" />
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        )}
 
         {/* Progress overview */}
         {totalCount > 0 && (
