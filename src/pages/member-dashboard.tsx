@@ -206,8 +206,8 @@ function ActivateBanner({ name }: { name: string }) {
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           {[
-            { icon: BookOpen, label: "Training Program", price: "$150", desc: "Full curriculum, videos & PDFs" },
-            { icon: Star, label: "Founding Membership", price: "$250", desc: "Community, coaching & benefits" },
+            { icon: BookOpen, label: "Training Program", price: "$200", desc: "Full curriculum, videos & PDFs" },
+            { icon: Star, label: "Founding Membership", price: "$300", desc: "Community, coaching & benefits" },
             { icon: Shield, label: "Bundle (Best Value)", price: "$400", desc: "Everything — training + membership" },
           ].map(({ icon: Icon, label, price, desc }) => (
             <Card key={label} className="text-center cursor-pointer hover:border-primary/50 transition-colors"

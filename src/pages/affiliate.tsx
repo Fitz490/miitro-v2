@@ -176,10 +176,14 @@ export default function AffiliatePage() {
                 {/* Commission rates */}
                 <div>
                   <p className="font-semibold text-sm mb-2">Commission Rates</p>
-                  <div className="grid grid-cols-2 gap-3">
+                  <div className="grid grid-cols-3 gap-3">
                     <div className="bg-muted/50 rounded-lg p-3 border text-center">
                       <p className="text-2xl font-bold text-emerald-600">$50</p>
-                      <p className="text-xs text-muted-foreground mt-0.5">Training Program sale ($150)</p>
+                      <p className="text-xs text-muted-foreground mt-0.5">Training Program sale ($200)</p>
+                    </div>
+                    <div className="bg-muted/50 rounded-lg p-3 border text-center">
+                      <p className="text-2xl font-bold text-emerald-600">$75</p>
+                      <p className="text-xs text-muted-foreground mt-0.5">Founding Membership sale ($300)</p>
                     </div>
                     <div className="bg-muted/50 rounded-lg p-3 border text-center">
                       <p className="text-2xl font-bold text-emerald-600">$125</p>

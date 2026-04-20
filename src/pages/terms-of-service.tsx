@@ -122,8 +122,8 @@ export default function TermsOfService() {
                 <p className="mt-1">
                   Participation in the Founding Driver Program requires a one-time, non-refundable
                   fee based on the plan selected at enrollment:{" "}
-                  <strong className="text-foreground">$150</strong> (Training Program),{" "}
-                  <strong className="text-foreground">$250</strong> (Founding Membership), or{" "}
+                  <strong className="text-foreground">$200</strong> (Training Program),{" "}
+                  <strong className="text-foreground">$300</strong> (Founding Membership), or{" "}
                   <strong className="text-foreground">$400</strong> (Full Bundle — Training + Membership).
                   The applicable fee is displayed and confirmed during checkout before any charge is made.
                 </p>
